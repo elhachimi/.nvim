@@ -1,6 +1,20 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "help", "javascript", "typescript", "c", "lua", "rust" },
+  ensure_installed = {
+    "help",
+    "javascript",
+    "typescript",
+    "c",
+    "rust",
+    "tsx",
+    "toml",
+    "fish",
+    "json",
+    "yaml",
+    "css",
+    "html",
+    "lua"
+  },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -12,6 +26,7 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+    disable = {},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -19,5 +34,14 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  indent = {
+    enable = true,
+    disable = {},
+  },
+  autotag = {
+    enable = true,
+  },
 }
 
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
